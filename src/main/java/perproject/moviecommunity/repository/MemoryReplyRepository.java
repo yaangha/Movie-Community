@@ -20,7 +20,8 @@ public class MemoryReplyRepository implements ReplyRepository {
     @Override
     public Reply save(Reply reply) {
         reply.setId(++sequence);
-        return replyStore.put(reply.getId(), reply);
+        replyStore.put(reply.getId(), reply);
+        return reply;
     }
 
     /**

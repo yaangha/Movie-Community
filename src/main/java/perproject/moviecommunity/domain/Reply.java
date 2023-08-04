@@ -58,4 +58,16 @@ public class Reply {
     public void setModified_time(LocalDateTime modified_time) {
         this.modified_time = modified_time;
     }
+
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "id=" + id +
+                ", member=" + member +
+                ", review=" + review +
+                ", content='" + content + '\'' +
+                ", created_time=" + created_time +
+                ", modified_time=" + modified_time +
+                '}';
+    }
 }
