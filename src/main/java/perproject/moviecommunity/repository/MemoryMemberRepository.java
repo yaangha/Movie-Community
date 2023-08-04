@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository {
 
-    private static Map<Long, Member> m = new HashMap<>();
+    private static Map<Long, Member> memberStore = new HashMap<>();
     private static long sequence = 0L;
 
     /**
@@ -16,7 +16,7 @@ public class MemoryMemberRepository implements MemberRepository {
     @Override
     public Member save(Member member) {
         member.setId(++sequence);
-        m.put(member.getId(), member);
+        memberStore.put(member.getId(), member);
         return member;
     }
 
@@ -25,7 +25,7 @@ public class MemoryMemberRepository implements MemberRepository {
      */
     @Override
     public List<Member> findAll() {
-        return new ArrayList<>(m.values());
+        return new ArrayList<>(memberStore.values());
     }
 
     /**
@@ -35,7 +35,7 @@ public class MemoryMemberRepository implements MemberRepository {
      */
     @Override
     public Optional<Member> findById(Long id) {
-        return Optional.ofNullable(m.get(id));
+        return Optional.ofNullable(memberStore.get(id));
     }
 
     /**
@@ -44,7 +44,7 @@ public class MemoryMemberRepository implements MemberRepository {
      */
     @Override
     public Optional<Member> findByName(String name) {
-        return m.values().stream().filter(member -> member.getName().equals(name)).findAny();
+        return memberStore.values().stream().filter(member -> member.getName().equals(name)).findAny();
     }
 
     /**
@@ -52,6 +52,6 @@ public class MemoryMemberRepository implements MemberRepository {
      */
     @Override
     public Member remove(Member member) {
-        return m.remove(member.getId());
+        return memberStore.remove(member.getId());
     }
 }
