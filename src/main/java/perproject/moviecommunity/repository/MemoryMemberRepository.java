@@ -1,9 +1,11 @@
 package perproject.moviecommunity.repository;
 
+import org.springframework.stereotype.Repository;
 import perproject.moviecommunity.domain.Member;
 
 import java.util.*;
 
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> memberStore = new HashMap<>();

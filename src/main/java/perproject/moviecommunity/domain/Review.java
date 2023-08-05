@@ -6,9 +6,11 @@ public class Review {
 
     private Long id;
     private Member member;
+    private String title;
     private String content;
     private LocalDateTime created_time;
-    private LocalDateTime modified_tile;
+    private LocalDateTime modified_time;
+    private String status;
 
     // private int movie_id;
 
@@ -28,6 +30,14 @@ public class Review {
         this.member = member;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -44,12 +54,20 @@ public class Review {
         this.created_time = created_time;
     }
 
-    public LocalDateTime getModified_tile() {
-        return modified_tile;
+    public LocalDateTime getModified_time() {
+        return modified_time;
     }
 
-    public void setModified_tile(LocalDateTime modified_tile) {
-        this.modified_tile = modified_tile;
+    public void setModified_time(LocalDateTime modified_time) {
+        this.modified_time = modified_time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -57,9 +75,11 @@ public class Review {
         return "Review{" +
                 "id=" + id +
                 ", member=" + member +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", created_time=" + created_time +
-                ", modified_tile=" + modified_tile +
+                ", modified_time=" + modified_time +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

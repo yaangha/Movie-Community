@@ -1,23 +1,40 @@
 package perproject.moviecommunity.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
+import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.repository.MemoryReviewRepository;
 import perproject.moviecommunity.repository.ReviewRepository;
 
 import javax.swing.text.html.Option;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReviewService {
 
-    private final ReviewRepository reviewRepository = new MemoryReviewRepository();
+    private final MemoryReviewRepository reviewRepository;
+
+    @Autowired
+    public ReviewService(MemoryReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
     /**
      * 리뷰 생성시
      */
-    public Long create(Review review) {
-        reviewRepository.save(review);
+    public Long create(ReviewDto dto) {
+        Review review = new Review();
+        review.setTitle(dto.getTitle());
+        review.setContent(dto.getContent());
+        review.setStatus(dto.getStatus());
+        review.setCreated_time(LocalDateTime.now());
+        review.setModified_time(LocalDateTime.now());
+
+        review = reviewRepository.save(review);
         return review.getId();
     }
 
@@ -53,7 +70,11 @@ public class ReviewService {
     /**
      * 리뷰 수정시 사용
      */
-    public Review modifyReview(Review review) {
+    public Review modifyReview(Review review, ReviewDto dto) {
+        review.setTitle(dto.getTitle());
+        review.setContent(dto.getContent());
+        review.setModified_time(LocalDateTime.now());
+
         return reviewRepository.update(review);
     }
 }

@@ -1,14 +1,21 @@
 package perproject.moviecommunity.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
-import perproject.moviecommunity.repository.MemberRepository;
 import perproject.moviecommunity.repository.MemoryMemberRepository;
 
 import java.util.List;
 
+@Service
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemoryMemberRepository memberRepository;
+
+    @Autowired
+    public MemberService(MemoryMemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입

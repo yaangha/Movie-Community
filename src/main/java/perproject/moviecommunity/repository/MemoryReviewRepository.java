@@ -1,11 +1,13 @@
 package perproject.moviecommunity.repository;
 
+import org.springframework.stereotype.Repository;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Repository
 public class MemoryReviewRepository implements ReviewRepository {
 
     private static Map<Long, Review> reviewStore = new HashMap<>();

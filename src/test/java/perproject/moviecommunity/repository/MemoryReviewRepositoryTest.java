@@ -25,7 +25,7 @@ public class MemoryReviewRepositoryTest {
         review.setMember(member);
         review.setContent("this is test..");
         review.setCreated_time(LocalDateTime.now());
-        review.setModified_tile(LocalDateTime.now());
+        review.setModified_time(LocalDateTime.now());
 
         //when
         reviewRepository.save(review);
@@ -52,13 +52,13 @@ public class MemoryReviewRepositoryTest {
         r1.setMember(m1);
         r1.setContent("i'm apple");
         r1.setCreated_time(null);
-        r1.setModified_tile(null);
+        r1.setModified_time(null);
 
         Review r2 = new Review();
         r2.setMember(m2);
         r2.setContent("i'm melon");
         r2.setCreated_time(null);
-        r2.setModified_tile(null);
+        r2.setModified_time(null);
 
         //when
         memberRepository.save(m1);
@@ -88,19 +88,19 @@ public class MemoryReviewRepositoryTest {
         r1.setMember(m1);
         r1.setContent("i'm apple");
         r1.setCreated_time(null);
-        r1.setModified_tile(null);
+        r1.setModified_time(null);
 
         Review r2 = new Review();
         r2.setMember(m2);
         r2.setContent("i'm melon");
         r2.setCreated_time(null);
-        r2.setModified_tile(null);
+        r2.setModified_time(null);
 
         Review r3 = new Review();
         r3.setMember(m2);
         r3.setContent("i'm third");
         r3.setCreated_time(null);
-        r3.setModified_tile(null);
+        r3.setModified_time(null);
 
         //when
         memberRepository.save(m1);
