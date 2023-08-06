@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.ReviewDto;
+import perproject.moviecommunity.repository.MemoryMemberRepository;
 import perproject.moviecommunity.repository.MemoryReviewRepository;
-import perproject.moviecommunity.repository.ReviewRepository;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -17,17 +16,22 @@ import java.util.Optional;
 public class ReviewService {
 
     private final MemoryReviewRepository reviewRepository;
+    private final MemoryMemberRepository memberRepository;
 
     @Autowired
-    public ReviewService(MemoryReviewRepository reviewRepository) {
+    public ReviewService(MemoryReviewRepository reviewRepository, MemoryMemberRepository memberRepository) {
         this.reviewRepository = reviewRepository;
+        this.memberRepository = memberRepository;
     }
 
     /**
      * 리뷰 생성시
      */
     public Long create(ReviewDto dto) {
+        Member member = memberRepository.findById(dto.getMember_id()).get();
+
         Review review = new Review();
+        review.setMember(member);
         review.setTitle(dto.getTitle());
         review.setContent(dto.getContent());
         review.setStatus(dto.getStatus());
@@ -35,13 +39,17 @@ public class ReviewService {
         review.setModified_time(LocalDateTime.now());
 
         review = reviewRepository.save(review);
+
+        System.out.println("review = " + review.toString());
+
         return review.getId();
     }
 
     /**
      * 리뷰 삭제시
      */
-    public Long delete(Review review) {
+    public Long delete(Long review_id) {
+        Review review = reviewRepository.findById(review_id).get();
         reviewRepository.remove(review.getId());
         return review.getId();
     }

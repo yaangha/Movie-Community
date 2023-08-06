@@ -7,8 +7,8 @@ import perproject.moviecommunity.repository.MemoryMemberRepository;
 
 public class MemberServiceTest {
 
-    private MemberService memberService = new MemberService();
     private MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    private MemberService memberService = new MemberService(memberRepository);
 
     @Test
     public void join() {

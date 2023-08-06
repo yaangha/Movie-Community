@@ -21,14 +21,16 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("create")
-    public String create() {
+    @GetMapping("create") // todo 주소 수정 필요
+    public String create(Long member_id, Model model) {
+        model.addAttribute("member_id", member_id);
         return "/review/create";
     }
 
     @PostMapping("create")
     public String createReview(ReviewDto dto) {
         reviewService.create(dto);
+
         return "redirect:/";
     }
 
@@ -43,6 +45,12 @@ public class ReviewController {
     public String modifyReview(Long review_id, ReviewDto dto) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
         reviewService.modifyReview(review, dto);
+        return "redirect:/";
+    }
+
+    @GetMapping("delete")
+    public String deleteReview(Long review_id) {
+        reviewService.delete(review_id);
         return "redirect:/";
     }
 }

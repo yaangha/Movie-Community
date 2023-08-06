@@ -20,10 +20,12 @@ public class HomeController {
     }
 
     // todo
-    @GetMapping("/")
-    public String home(Model model) {
+    @GetMapping("/homepage")
+    public String home(Long member_id, Model model) {
         List<Review> reviewList = reviewService.findReviews();
         model.addAttribute("reviewList", reviewList);
+        model.addAttribute("member_id", member_id);
+
         return "/member/homepage";
     }
 

@@ -4,15 +4,18 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
+import perproject.moviecommunity.dto.MemberDto;
+import perproject.moviecommunity.dto.ReviewDto;
+import perproject.moviecommunity.repository.MemoryMemberRepository;
 import perproject.moviecommunity.repository.MemoryReviewRepository;
 import perproject.moviecommunity.repository.ReviewRepository;
 
 public class ReviewServiceTest {
 
-    private ReviewService reviewService = new ReviewService();
-    private ReviewRepository reviewRepository = new MemoryReviewRepository();
-
-    private MemberService memberService = new MemberService();
+    private MemoryReviewRepository reviewRepository = new MemoryReviewRepository();
+    private ReviewService reviewService = new ReviewService(reviewRepository);
+    private MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    private MemberService memberService = new MemberService(memberRepository);
 
     @Test
     public void create() {
@@ -25,9 +28,14 @@ public class ReviewServiceTest {
         review.setMember(member);
         review.setContent("i'm apple");
 
+        ReviewDto dto = new ReviewDto();
+        dto.setTitle("test");
+        dto.setContent("test");
+        dto.setStatus("1");
+
         //when
         memberService.join(member);
-        Long reviewId = reviewService.create(review);
+        Long reviewId = reviewService.create(dto);
 
         //then
         Assertions.assertThat(review.getId()).isEqualTo(reviewId);
