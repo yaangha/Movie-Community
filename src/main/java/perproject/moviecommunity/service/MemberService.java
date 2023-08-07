@@ -50,4 +50,8 @@ public class MemberService {
             return null;
         }
     }
+
+    public Member findOneById(Long id) {
+        return memberRepository.findById(id).get();
+    }
 }

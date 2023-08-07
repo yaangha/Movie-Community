@@ -22,8 +22,8 @@ public class HomeController {
     // todo
     @GetMapping("/homepage")
     public String home(Long member_id, Model model) {
-        List<Review> reviewList = reviewService.findReviews();
-        model.addAttribute("reviewList", reviewList);
+        List<Review> review_list = reviewService.findReviews();
+        model.addAttribute("review_list", review_list);
         model.addAttribute("member_id", member_id);
 
         return "/member/homepage";

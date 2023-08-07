@@ -10,6 +10,7 @@ import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.service.ReviewService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class ReviewController {
@@ -21,7 +22,7 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("create") // todo 주소 수정 필요
+    @GetMapping("create")
     public String create(Long member_id, Model model) {
         model.addAttribute("member_id", member_id);
         return "/review/create";
@@ -30,8 +31,7 @@ public class ReviewController {
     @PostMapping("create")
     public String createReview(ReviewDto dto) {
         reviewService.create(dto);
-
-        return "redirect:/";
+        return "redirect:/homepage?member_id=" + dto.getMember_id();
     }
 
     @GetMapping("modify")
@@ -45,12 +45,19 @@ public class ReviewController {
     public String modifyReview(Long review_id, ReviewDto dto) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
         reviewService.modifyReview(review, dto);
-        return "redirect:/";
+        return "redirect:/homepage?member_id=" + review.getMember().getId();
     }
 
     @GetMapping("delete")
     public String deleteReview(Long review_id) {
-        reviewService.delete(review_id);
-        return "redirect:/";
+        Review review = reviewService.delete(review_id);
+        return "redirect:/homepage?member_id=" + review.getMember().getId();
+    }
+
+    @GetMapping("detail")
+    public String detail(Long review_id, Model model) {
+        Review review = reviewService.findReviewByReviewId(review_id).get();
+        model.addAttribute("review", review);
+        return "/review/detail";
     }
 }

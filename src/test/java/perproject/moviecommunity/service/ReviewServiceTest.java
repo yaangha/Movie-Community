@@ -13,9 +13,9 @@ import perproject.moviecommunity.repository.ReviewRepository;
 public class ReviewServiceTest {
 
     private MemoryReviewRepository reviewRepository = new MemoryReviewRepository();
-    private ReviewService reviewService = new ReviewService(reviewRepository);
     private MemoryMemberRepository memberRepository = new MemoryMemberRepository();
     private MemberService memberService = new MemberService(memberRepository);
+    private ReviewService reviewService = new ReviewService(reviewRepository, memberRepository);
 
     @Test
     public void create() {

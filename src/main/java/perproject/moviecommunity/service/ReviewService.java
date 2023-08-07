@@ -48,10 +48,9 @@ public class ReviewService {
     /**
      * 리뷰 삭제시
      */
-    public Long delete(Long review_id) {
+    public Review delete(Long review_id) {
         Review review = reviewRepository.findById(review_id).get();
-        reviewRepository.remove(review.getId());
-        return review.getId();
+        return reviewRepository.remove(review.getId());
     }
 
     /**
