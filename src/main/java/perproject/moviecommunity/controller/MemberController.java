@@ -69,6 +69,7 @@ public class MemberController {
 
         model.addAttribute("reviewSave", reviewSave);
         model.addAttribute("reviewRelease", reviewRelease);
+        model.addAttribute("member_id", member_id);
 
         return "/member/mypage";
     }

@@ -54,10 +54,15 @@ public class ReviewController {
         return "redirect:/homepage?member_id=" + review.getMember().getId();
     }
 
+    /**
+     *
+     * @param member_id login user
+     */
     @GetMapping("detail")
-    public String detail(Long review_id, Model model) {
+    public String detail(Long member_id, Long review_id, Model model) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
         model.addAttribute("review", review);
+        model.addAttribute("member_id", member_id);
         return "/review/detail";
     }
 }

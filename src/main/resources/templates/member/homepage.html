@@ -11,7 +11,7 @@
             position: fixed;
         }
 
-        #title {
+        #title, #content {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -21,32 +21,33 @@
             color: black;
             text-decoration: none;
         }
+
+        #nav_bar {
+            border:thin solid black;
+            margin:20px 0;
+            padding:20px 5px;
+        }
     </style>
 </head>
 <body>
-<div th:text="${member_id}"></div>
-<a th:href="@{create(member_id=${member_id})}">create</a>
-<a th:href="@{mypage(member_id=${member_id})}">mypage</a>
-
-<div style="width: 95%; margin:auto;">
-    <div style="margin: 30px 0;"><!-- review block -->
-        <div th:each="review : ${ review_list }" style="display: inline-block; margin: 10px 48px;">
-            <a th:href="@{ /detail?review_id={review_id} (review_id = ${ review.id }) }">
-                <div id="title" style="width: 350px; font-weight: bold; font-size: 21px; margin-bottom: 2px; margin-bottom: 8px;" th:text="${ review.title }"></div>
-                <div th:text="${ 'by ' }" style="font-size: small; margin-bottom: 3px;"></div>
+<div style="width: 100%; margin:auto;"><!-- review part start -->
+    <div th:text="${member.name + '님'}"></div>
+    <div style="width: 75%; margin:auto;"><!-- review block -->
+        <div id="nav_bar"><!-- nav bar start-->
+            <a th:href="@{create(member_id=${member.id})}">create</a>
+            <a th:href="@{mypage(member_id=${member.id})}">mypage</a>
+        </div><!-- nav bar end-->
+        <div th:each="review : ${ review_list }" style="margin: 20px 50px; border-bottom:thin solid silver;">
+            <a th:href="@{ /detail(member_id=${member.id}, review_id=${ review.id }) }">
+                <div id="title" style="width: 350px; font-weight: bold; font-size: 25px; margin-bottom: 8px;" th:text="${ review.title }"></div>
+                <div id="content" th:text="${review.content}"></div>
+                <div th:text="${ 'by ' + review.member.name }" style="font-size: small; margin: 5px;"></div>
                 <div style="font-size: x-small; color:gray; float: right;">
                     <span th:text="${ #temporals.format(review.created_time, 'yyyy/MM/dd') }"></span><i class="bi bi-alarm" style="margin-left: 3px;"></i>
-                </div>
-                <div style="font-size: small; text-align: center;">
-                    <span style="color:gray;">
-                        <i class="bi bi-chat-text" style="margin-right: 3px;"></i>
-                        <span>COUNTS</span>
-                    </span>
                 </div>
             </a>
         </div>
     </div>
 </div><!-- review part end -->
-
 </body>
 </html>

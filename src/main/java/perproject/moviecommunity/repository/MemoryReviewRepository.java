@@ -31,6 +31,17 @@ public class MemoryReviewRepository implements ReviewRepository {
         return new ArrayList<>(reviewStore.values());
     }
 
+    /**
+     * 임시저장 또는 발행된 리뷰 조회
+     */
+    @Override
+    public List<Review> findReviewByStatus(String status) {
+        return reviewStore.values()
+                .stream()
+                .filter(r -> r.getStatus().equals(status))
+                .collect(Collectors.toList());
+    }
+
     @Override
     public List<Review> findByMember(Member member) {
         return reviewStore.values()

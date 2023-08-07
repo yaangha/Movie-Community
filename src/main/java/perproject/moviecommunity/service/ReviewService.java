@@ -84,4 +84,11 @@ public class ReviewService {
 
         return reviewRepository.update(review);
     }
+
+    /**
+     * 상태에 따른 리뷰 조회
+     */
+    public List<Review> readReviewByStatus(String status) {
+        return reviewRepository.findReviewByStatus(status);
+    }
 }

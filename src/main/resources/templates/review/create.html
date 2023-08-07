@@ -51,10 +51,19 @@
         border: none;
         font-size: 36px;
     }
+
+    #nav_bar {
+        border:thin solid black;
+        margin:20px 0;
+        padding:20px 5px;
+    }
     </style>
 </head>
 <body>
     <div style="width:100%; margin: auto;"><!-- main content -->
+        <div id="nav_bar"><!-- nav bar start-->
+            <a th:href="@{mypage(member_id=${member_id})}">mypage</a>
+        </div><!-- nav bar end-->
         <div>
             <form id="formCreate">
                 <input id="member_id" name="member_id" th:value="${member_id}"/>
