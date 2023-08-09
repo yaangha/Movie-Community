@@ -20,16 +20,32 @@
 	}
 
 	#nav_bar {
-        border:thin solid black;
+        margin: 10px;
+        border-bottom:3px solid black;
         margin:20px 0;
         padding:20px 5px;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        text-shadow: 2px 1px 4px silver;
+    }
+
+    #nav_bar a {
+        padding: 0 25px;
+        color: black;
+    }
+
+    a {
+        text-decoration: none;
     }
 </style>
 </head>
 <body>
-  <div style="width: 80%; margin: auto; padding-top: 50px;">
+  <div style="width: 75%; margin: auto;">
     <div id="nav_bar"><!-- nav bar start-->
-      <a th:href="@{create(member_id=${member_id})}">create</a>
+      <a th:href="@{homepage(member_id=${member_id})}">Home</a>
+      <a th:href="@{create(member_id=${member_id})}">Create</a>
+      <a href="/" style="color: red;">Logout</a>
     </div><!-- nav bar end-->
     <div style="width:100%; margin-bottom: 15px;">
       <button id="btnChangeRelease" style="width: 49%; display: inline-block; padding: 15px 0; text-align: center; font-size: 27px; border:none; background-color:white; border-bottom: thin solid black;">발행한 글 <span></span></button>
@@ -64,6 +80,37 @@
       </div>
     </div>
   </div>
-</div>
+
+<script>
+  const btnChangeRelease = document.querySelector('#btnChangeRelease');
+  const btnChangeSave = document.querySelector('#btnChangeSave');
+
+  btnChangeRelease.addEventListener('click', () => {
+      document.querySelector('#releaseList').style.display = '';
+      document.querySelector('#saveList').style.display = 'none';
+      document.querySelector('#btnChangeSave').style.color = 'silver';
+      document.querySelector('#btnChangeRelease').style.color = 'black';
+      document.querySelector('#btnChangeRelease').style.borderBottom = 'thin solid black';
+      document.querySelector('#btnChangeSave').style.borderBottom = 'thin solid silver';
+  })
+
+  btnChangeSave.addEventListener('click', () => {
+      document.querySelector('#saveList').style.display = '';
+      document.querySelector('#releaseList').style.display = 'none';
+      document.querySelector('#btnChangeSave').style.color = 'black';
+      document.querySelector('#btnChangeRelease').style.color = 'silver';
+      document.querySelector('#btnChangeSave').style.borderBottom = 'thin solid black';
+      document.querySelector('#btnChangeRelease').style.borderBottom = 'thin solid silver';
+  })
+
+  function deleteUser() {
+      const result = confirm('정말 탈퇴하시겠습니까? 탈퇴하시면 작성된 글들은 모두 삭제됩니다.');
+      const idName = document.querySelector('#idName').innerText;
+      if (result) {
+          window.location.href = '/deleteUser?idName=' + idName;
+      }
+  }
+</script>
+
 </body>
 </html>

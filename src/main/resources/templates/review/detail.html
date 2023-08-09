@@ -15,14 +15,23 @@
 		}
 
 		a {
-			color: black;
 			text-decoration: none;
 		}
 
 		#nav_bar {
-            border:thin solid black;
+            margin: 10px;
+            border-bottom:3px solid black;
             margin:20px 0;
             padding:20px 5px;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            text-shadow: 2px 1px 4px silver;
+        }
+
+        #nav_bar a {
+            padding: 0 25px;
+            color: black;
         }
 
         #btnModify, #btnDelete {
@@ -36,8 +45,10 @@
 <body>
     <div style="margin: auto; width: 75%;">
         <div id="nav_bar"><!-- nav bar start-->
-            <a th:href="@{create(member_id=${member_id})}">create</a>
-            <a th:href="@{mypage(member_id=${member_id})}">mypage</a>
+            <a th:href="@{homepage(member_id=${member_id})}">Home</a>
+            <a th:href="@{create(member_id=${member_id})}">Create</a>
+            <a th:href="@{mypage(member_id=${member_id})}">Mypage</a>
+            <a href="/" style="color:red;">Logout</a>
         </div><!-- nav bar end-->
         <div style="border-bottom: thin solid silver; padding-bottom: 10px; margin-bottom: 5px;">
             <div>
@@ -51,9 +62,8 @@
         <div th:text="${ review.content }" style="height:450px; padding-top: 10px; padding-bottom: 50px; font-size: 15px; white-space: pre-wrap; line-height: 1.5em;"></div>
         <div th:if="${member_id == review.member.id}">
             <div style="text-align: right;">
-
-                <a th:href="@{/delete?(review_id=${review.id})}"><button id="btnDelete" style="border-bottom:thin solid red; color:red;">삭제하기</button></a>
-                <a th:href="@{/modify?(review_id=${review.id})}"><button id="btnModify" style="border-bottom:thin solid blue; color:blue;">수정하기</button></a>
+                <a th:href="@{/delete?(review_id=${review.id})}"><button id="btnDelete" style="padding-bottom: 3px; border-bottom:thin solid red; color:red;">삭제하기</button></a>
+                <a th:href="@{/modify?(review_id=${review.id})}"><button id="btnModify" style="padding-bottom: 3px; border-bottom:thin solid blue; color:blue;">수정하기</button></a>
             </div>
         </div>
     </div>

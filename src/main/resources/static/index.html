@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <style>
         #main_box {
-            width: 80%;
+            width: 75%;
+            padding-top: 250px;
             margin: auto;
+            text-align: center;
         }
 
         #title {
-            font-size: 36px;
-            font-weight: bold;
+            padding: 15px;
         }
 
         #join, #login {
             font-size: 25px;
             padding: 5px 10px;
+            text-decoration: none;
+            color: black;
+        }
+
+        button {
+            width: 150px;
+            height: 35px;
+            background-color: white;
+            border: thin solid black;
+            font-size: 15px;
         }
     </style>
 </head>
 <body>
 <div id="main_box">
     <div id="title">해당 서비스는 로그인 후 사용 가능합니다.</div>
-    <a id="join" href="join">join</a>
-    <a id="login" href="login">login</a>
+    <a id="join" href="join"><button>회원가입</button></a>
+    <a id="login" href="login"><button>로그인</button></a>
 </div>
 </body>
 </html>
