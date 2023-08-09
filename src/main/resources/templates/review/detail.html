@@ -19,38 +19,42 @@
 			text-decoration: none;
 		}
 
-		#btnModify, #btnDelete {
-			border: none;
-			background-color: white;
-			font-size: 25px;
-		}
-
 		#nav_bar {
             border:thin solid black;
             margin:20px 0;
             padding:20px 5px;
         }
+
+        #btnModify, #btnDelete {
+            margin: 10px;
+            background-color: white;
+            border: none;
+            color: black;
+        }
 	</style>
 </head>
 <body>
-    <div style="margin: auto; width: 80%;">
+    <div style="margin: auto; width: 75%;">
         <div id="nav_bar"><!-- nav bar start-->
             <a th:href="@{create(member_id=${member_id})}">create</a>
             <a th:href="@{mypage(member_id=${member_id})}">mypage</a>
         </div><!-- nav bar end-->
         <div style="border-bottom: thin solid silver; padding-bottom: 10px; margin-bottom: 5px;">
             <div>
-                <div th:text="${ review.title }" style="width: 93%; font-size: 30px; font-weight:bolder; margin: 8px 0; display: inline-block;"></div>
+                <div style="color: gray; font-size:x-small;"><i class="bi bi-alarm" style="margin-right:3px;"></i><span th:text="${ #temporals.format(review.created_time, 'yyyy/MM/dd hh:mm') }"></span></div>
+                <div th:text="${ review.title }" style="width: 100%; font-size: 30px; font-weight:bolder; margin: 10px 0; display: inline-block;"></div>
             </div>
             <div style="color: gray; font-size: small;">
-                <div th:text="${ 'by ' + review.member.name }" style="display: inline-block;"></div>
-                <div style="display: inline-block;"><i class="bi bi-alarm" style="margin: 0 3px;"></i><span th:text="${ #temporals.format(review.created_time, 'yyyy/MM/dd hh:mm') }"></span></div>
+                <div th:text="${ '작성자 ' + review.member.name }" style="display: inline-block;"></div>
             </div>
         </div>
-        <div th:text="${ review.content }" style="padding-bottom: 50px; font-size: 15px; white-space: pre-wrap; line-height: 1.5em;"></div>
+        <div th:text="${ review.content }" style="height:450px; padding-top: 10px; padding-bottom: 50px; font-size: 15px; white-space: pre-wrap; line-height: 1.5em;"></div>
         <div th:if="${member_id == review.member.id}">
-            <a th:href="@{/modify?(review_id=${review.id})}"><button id="btnModify"><i class="bi bi-pencil-square"></i></button></a>
-            <a th:href="@{/delete?(review_id=${review.id})}"><button id="btnDelete"><i class="bi bi-trash3"></i></button></a>
+            <div style="text-align: right;">
+
+                <a th:href="@{/delete?(review_id=${review.id})}"><button id="btnDelete" style="border-bottom:thin solid red; color:red;">삭제하기</button></a>
+                <a th:href="@{/modify?(review_id=${review.id})}"><button id="btnModify" style="border-bottom:thin solid blue; color:blue;">수정하기</button></a>
+            </div>
         </div>
     </div>
 </body>
