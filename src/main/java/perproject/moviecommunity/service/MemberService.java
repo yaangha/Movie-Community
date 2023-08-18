@@ -1,6 +1,7 @@
 package perproject.moviecommunity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.repository.MemoryMemberRepository;
@@ -10,17 +11,20 @@ import java.util.List;
 @Service
 public class MemberService {
 
+    private final PasswordEncoder passwordEncoder;
     private final MemoryMemberRepository memberRepository;
 
     @Autowired
-    public MemberService(MemoryMemberRepository memberRepository) {
+    public MemberService(MemoryMemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
      * 회원가입
      */
     public Long join(Member member) {
+        member.setPw(passwordEncoder.encode(member.getPw()));
         memberRepository.save(member);
         return member.getId();
     }

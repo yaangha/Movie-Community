@@ -1,10 +1,19 @@
 package perproject.moviecommunity.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Member {
 
     private Long id;
     private String name;
     private String pw;
+    private Set<MemberRole> roles = new HashSet<>();
+
+    public Member addRole(MemberRole role) {
+        roles.add(role);
+        return this;
+    }
 
     public Long getId() {
         return id;
@@ -30,12 +39,11 @@ public class Member {
         this.pw = pw;
     }
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", pw='" + pw + '\'' +
-                '}';
+    public Set<MemberRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<MemberRole> roles) {
+        this.roles = roles;
     }
 }
