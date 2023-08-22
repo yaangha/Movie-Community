@@ -38,7 +38,7 @@ public class MemberController {
         member.setPw(dto.getPw());
 
         memberService.join(member);
-
+        System.out.println(member.toString());
         return "redirect:/login";
     }
 

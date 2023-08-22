@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
+import perproject.moviecommunity.domain.MemberRole;
 import perproject.moviecommunity.repository.MemoryMemberRepository;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class MemberService {
      */
     public Long join(Member member) {
         member.setPw(passwordEncoder.encode(member.getPw()));
+        member.addRole(MemberRole.USER);
         memberRepository.save(member);
         return member.getId();
     }
