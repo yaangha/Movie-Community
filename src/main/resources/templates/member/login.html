@@ -38,11 +38,11 @@
         <form id="formLogin">
           <div class="info" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
             <i class="bi bi-person"></i>
-            <input id="name" name="name" type="text" placeholder="아이디"/>
+            <input id="username" name="username" type="text" placeholder="아이디" autofocus/>
           </div>
           <div class="info" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border-top: none;">
             <i class="bi bi-shield-lock"></i>
-            <input id="pw" name="pw" type="password" placeholder="비밀번호"/>
+            <input id="password" name="password" type="password" placeholder="비밀번호"/>
           </div>
         </form>
         <div>
@@ -59,10 +59,10 @@
 	const formLogin = document.querySelector('#formLogin');
 	const btnLogin = document.querySelector('#btnLogin');
 	btnLogin.addEventListener('click', function() {
-		const idName = document.querySelector('#name').value;
-		const password = document.querySelector('#pw').value;
+		const username = document.querySelector('#username').value;
+		const password = document.querySelector('#password').value;
 
-		if (idName == '' || password == '') {
+		if (username == '' || password == '') {
 			alert('로그인 정보를 모두 입력해주세요!');
 			return;
 		}

@@ -43,9 +43,9 @@
 <body>
   <div style="width: 75%; margin: auto;">
     <div id="nav_bar"><!-- nav bar start-->
-      <a th:href="@{homepage(member_id=${member_id})}">Home</a>
-      <a th:href="@{create(member_id=${member_id})}">Create</a>
-      <a href="/" style="color: red;">Logout</a>
+      <a th:href="@{homepage}">Home</a>
+      <a th:href="@{create}">Create</a>
+      <a th:href="@{logout}" style="color: red;">Logout</a>
     </div><!-- nav bar end-->
     <div style="width:100%; margin-bottom: 15px;">
       <button id="btnChangeRelease" style="width: 49%; display: inline-block; padding: 15px 0; text-align: center; font-size: 27px; border:none; background-color:white; border-bottom: thin solid black;">발행한 글 <span></span></button>

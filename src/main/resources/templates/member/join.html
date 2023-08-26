@@ -38,19 +38,19 @@
         <form id="formJoin">
             <div class="info">
                 <h3>
-                    <label for="name">이름</label>
+                    <label for="username">이름</label>
                 </h3>
                 <div class="input-div">
-                    <input id="name" name="name" type="text"/>
+                    <input id="username" name="username" type="text" autofocus/>
                 </div>
             </div>
 
             <div class="info">
                 <h3>
-                    <label for="pw">비밀번호</label>
+                    <label for="password">비밀번호</label>
                 </h3>
                 <div class="input-div">
-                    <input id="pw" name="pw" type="password" style="padding: 0 15px 0 0;"/>
+                    <input id="password" name="password" type="password" style="padding: 0 15px 0 0;"/>
                     <i class="bi bi-shield-lock" style="font-size: 21px; color: silver; vertical-align: middle;"></i>
                 </div>
             </div>
@@ -61,7 +61,14 @@
     <script>
 	const formJoin = document.querySelector('#formJoin');
 	const btnJoin = document.querySelector('#btnJoin');
+	const username = document.querySelector('#username');
+	const password = document.querySelector('#password');
 	btnJoin.addEventListener('click', function () {
+	    if (username.value == '' || password.value == '') {
+	        alert('회원가입 정보를 모두 채워주세요!');
+	        return;
+	    }
+
 		formJoin.action = '/join';
 		formJoin.method = 'post';
 		formJoin.submit();

@@ -47,17 +47,16 @@
 <div style="width: 100%; margin:auto;"><!-- review part start -->
     <div style="width: 75%; margin:auto;"><!-- review block -->
         <div id="nav_bar"><!-- nav bar start-->
-            <div style="display:inline-block; padding: 0 25px;" th:text="${member.name + '님'}"></div>
-            <a th:href="@{homepage(member_id=${member.id})}">Home</a>
-            <a th:href="@{create(member_id=${member.id})}">Create</a>
-            <a th:href="@{mypage(member_id=${member.id})}">MyPage</a>
-            <a href="/" style="color:red;">Logout</a>
+            <a th:href="@{homepage}">Home</a>
+            <a th:href="@{create}">Create</a>
+            <a th:href="@{mypage}">MyPage</a>
+            <a th:href="@{logout}" style="color:red;">Logout</a>
         </div><!-- nav bar end-->
         <div th:each="review : ${ review_list }" style="margin: 25px 0; padding-bottom: 25px; border-bottom: thin solid silver;">
-            <a th:href="@{ /detail(member_id=${member.id}, review_id=${ review.id }) }">
+            <a th:href="@{ /detail(review_id=${ review.id }) }">
                 <div id="title" style="width: 100%; font-size: 25px; margin-bottom: 8px;" th:text="${ review.title }"></div>
                 <div id="content" th:text="${review.content}" style="padding-bottom: 25px;"></div>
-                <div th:text="${ '작성자 ' + review.member.name }" style="margin:10px 0 5px 0; font-size: small;"></div>
+                <div th:text="${ '작성자 ' + review.member.username }" style="margin:10px 0 5px 0; font-size: small;"></div>
                 <div style="font-size: small; color:gray;">
                     <i class="bi bi-alarm" style="margin-right: 3px;"></i><span th:text="${ #temporals.format(review.created_time, 'yyyy/MM/dd') }"></span>
                 </div>

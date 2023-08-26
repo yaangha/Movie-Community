@@ -6,11 +6,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
-import perproject.moviecommunity.dto.MemberDto;
 import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.repository.MemoryMemberRepository;
 import perproject.moviecommunity.repository.MemoryReviewRepository;
-import perproject.moviecommunity.repository.ReviewRepository;
 
 public class ReviewServiceTest {
 

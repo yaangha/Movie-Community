@@ -16,7 +16,6 @@ public class MemberSecurityDto extends User {
 
     public MemberSecurityDto(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-
         this.username = username;
         this.password = password;
     }
@@ -25,7 +24,7 @@ public class MemberSecurityDto extends User {
         List<GrantedAuthority> authorities = member.getRoles().stream()
                 .map(x -> new SimpleGrantedAuthority(x.getRole()))
                 .collect(Collectors.toList());
-        MemberSecurityDto dto = new MemberSecurityDto(member.getName(), member.getPw(), authorities);
+        MemberSecurityDto dto = new MemberSecurityDto(member.getUsername(), member.getPassword(), authorities);
         return dto;
     }
 

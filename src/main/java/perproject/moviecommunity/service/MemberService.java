@@ -25,7 +25,7 @@ public class MemberService {
      * 회원가입
      */
     public Long join(Member member) {
-        member.setPw(passwordEncoder.encode(member.getPw()));
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
         member.addRole(MemberRole.USER);
         memberRepository.save(member);
         return member.getId();
@@ -42,15 +42,15 @@ public class MemberService {
      * 이름으로 회원을 조회할 때 사용
      */
     public Member findOne(String name) {
-        return memberRepository.findByName(name).get();
+        return memberRepository.findByUsername(name).get();
     }
 
     /**
      * 로그인할 때 사용
      */
     public Member login(String name, String pw) {
-        Member member = memberRepository.findByName(name).get();
-        if (pw.equals(member.getPw())) {
+        Member member = memberRepository.findByUsername(name).get();
+        if (pw.equals(member.getPassword())) {
             return member;
         } else {
             return null;

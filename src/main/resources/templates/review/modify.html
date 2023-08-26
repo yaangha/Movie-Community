@@ -38,9 +38,9 @@
 <div style="width:100%; margin: auto;"><!-- main content -->
   <div style="width:75%; margin: auto;">
     <div id="nav_bar"><!-- nav bar start-->
-      <a th:href="@{homepage(member_id=${review.member.id})}">Home</a>
-      <a th:href="@{create(member_id=${review.member.id})}">Create</a>
-      <a th:href="@{mypage(member_id=${review.member.id})}">Mypage</a>
+      <a th:href="@{homepage}">Home</a>
+      <a th:href="@{create}">Create</a>
+      <a th:href="@{mypage}">Mypage</a>
       <a href="/" style="color: red;">Logout</a>
     </div><!-- nav bar end-->
     <form id="formModify">
@@ -49,7 +49,7 @@
         <textarea id="title" name="title" th:text="${ review.title }" style="width: 100%; border: none; font-size: 30px; height: 30px; resize: none;" placeholder="제목을 입력하세요" required autofocus></textarea>
       </div>
       <div>
-        <textarea id="content" name="content" th:text="${ review.content }" style="width: 100%; height:450px; padding-top: 10px; padding-bottom: 50px; font-size: 15px; border: none; resize: none; margin-top: 15px; line-height: 1.5em;" placeholder="내용을 입력하세요(img)" required></textarea>
+        <textarea id="content" name="content" th:text="${ review.content }" style="width: 100%; height:450px; padding-top: 10px; padding-bottom: 50px; font-size: 15px; border: none; resize: none; margin-top: 15px; line-height: 1.5em;" placeholder="내용을 입력하세요" required></textarea>
       </div>
     </form>
     <div style="text-align: right;">
@@ -67,7 +67,7 @@
 
   btnModify.addEventListener('click', function () {
       if (title.value == '' || content.value == '') {
-          alert('제목과 내용, 별점을 모두 채워주세요!');
+          alert('제목과 내용을 모두 채워주세요!');
           return;
       }
       formModify.action = '/modify';
