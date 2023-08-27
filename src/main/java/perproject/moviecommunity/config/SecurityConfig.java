@@ -42,13 +42,13 @@ public class SecurityConfig {
 
         http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/homepage")
+                .defaultSuccessUrl("/")
                 .failureUrl("/login")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/");
 
-        http.authorizeRequests().antMatchers("/join", "/login", "/homepage", "/detail").permitAll()
+        http.authorizeRequests().antMatchers("/join", "/login", "/", "/detail").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();

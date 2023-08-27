@@ -40,8 +40,6 @@ public class ReviewService {
 
         review = reviewRepository.save(review);
 
-        System.out.println("review = " + review.toString());
-
         return review.getId();
     }
 

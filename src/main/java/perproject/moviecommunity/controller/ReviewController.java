@@ -37,8 +37,8 @@ public class ReviewController {
     public String createReview(@AuthenticationPrincipal MemberSecurityDto memberSecurityDto, ReviewDto dto) {
         Member member = memberService.findOne(memberSecurityDto.getUsername());
         dto.setMember_id(member.getId());
-        reviewService.create(dto);
-        return "redirect:/homepage";
+        Long review_id = reviewService.create(dto);
+        return "redirect:/detail?review_id=" + review_id;
     }
 
     @GetMapping("modify")
@@ -52,21 +52,20 @@ public class ReviewController {
     public String modifyReview(Long review_id, ReviewDto dto) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
         reviewService.modifyReview(review, dto);
-        return "redirect:/homepage?member_id=" + review.getMember().getId();
+        return "redirect:/detail?review_id=" + review.getId();
     }
 
     @GetMapping("delete")
     public String deleteReview(Long review_id) {
         Review review = reviewService.delete(review_id);
-        return "redirect:/homepage";
+        return "redirect:/";
     }
 
     @GetMapping("detail")
-    public String detail(@AuthenticationPrincipal MemberSecurityDto memberSecurityDto, Long review_id, Model model) {
+    public String detail(Long review_id, Model model) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
-        Member member = memberService.findOne(memberSecurityDto.getUsername());
+
         model.addAttribute("review", review);
-        model.addAttribute("member_id", member.getId());
         return "/review/detail";
     }
 }

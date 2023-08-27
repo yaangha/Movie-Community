@@ -23,7 +23,7 @@ public class HomeController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/homepage")
+    @GetMapping("/")
     public String home(Model model) {
         List<Review> review_list = reviewService.readReviewByStatus("1");
 
