@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.MemberRole;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
+import perproject.moviecommunity.repository.MemberRepository;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import java.util.List;
 public class MemberService {
 
     private final PasswordEncoder passwordEncoder;
-    private final MemoryMemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberService(MemoryMemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -35,7 +35,7 @@ public class MemberService {
      * 전체 회원 조회시 사용
      */
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+        return memberRepository.findByOrderByIdAsc();
     }
 
     /**

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.ReviewDto;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
-import perproject.moviecommunity.repository.MemoryReviewRepository;
+import perproject.moviecommunity.repository.MemberRepository;
+import perproject.moviecommunity.repository.ReviewRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @Service
 public class ReviewService {
 
-    private final MemoryReviewRepository reviewRepository;
-    private final MemoryMemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public ReviewService(MemoryReviewRepository reviewRepository, MemoryMemberRepository memberRepository) {
+    public ReviewService(ReviewRepository reviewRepository, MemberRepository memberRepository) {
         this.reviewRepository = reviewRepository;
         this.memberRepository = memberRepository;
     }
@@ -55,7 +55,7 @@ public class ReviewService {
      * 전체 리뷰 조회시
      */
     public List<Review> findReviews() {
-        return reviewRepository.findAll();
+        return reviewRepository.findByOrderByIdAsc();
     }
 
     /**

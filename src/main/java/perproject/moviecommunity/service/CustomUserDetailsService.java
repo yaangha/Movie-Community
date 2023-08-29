@@ -7,23 +7,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.dto.MemberSecurityDto;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
+import perproject.moviecommunity.repository.MemberRepository;
 
 import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final MemoryMemberRepository memoryMemberRepository;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public CustomUserDetailsService(MemoryMemberRepository memoryMemberRepository) {
-        this.memoryMemberRepository = memoryMemberRepository;
+    public CustomUserDetailsService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Member> member = memoryMemberRepository.findByUsername(username);
+        Optional<Member> member = memberRepository.findByUsername(username);
         System.out.println("member.toString() = " + member.toString());
         if (member.isPresent()) {
             return MemberSecurityDto.fromEntity(member.get());

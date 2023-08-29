@@ -26,7 +26,7 @@ public class MemoryMemberRepository implements MemberRepository {
      * 전체 회원 조회시 사용
      */
     @Override
-    public List<Member> findAll() {
+    public List<Member> findByOrderByIdAsc() {
         return new ArrayList<>(memberStore.values());
     }
 
