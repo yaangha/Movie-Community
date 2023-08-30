@@ -6,13 +6,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class MovieCommunityApplication {
-//public class MovieCommunityApplication extends SpringBootServletInitializer {
+public class MovieCommunityApplication extends SpringBootServletInitializer {
 
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//		return application.sources(MovieCommunityApplication.class);
-//	}
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(MovieCommunityApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieCommunityApplication.class, args);

@@ -7,6 +7,7 @@ plugins {
 
 group = 'per-project'
 version = '0.0.1-SNAPSHOT'
+apply plugin: 'war' //-> 외장 톰캣 사용시 추가
 
 java {
 	sourceCompatibility = '11'
@@ -17,8 +18,8 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
-//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' //-> 외장 톰캣 사용시 추가
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -37,11 +38,12 @@ tasks.named('test') {
 }
 
 bootWar {
-	archiveBaseName = 'ROOT'
-	archiveFileName = 'ROOT.war'
-	enabled = true
+//	archiveBaseName = 'ROOT'
+//	archiveFileName = 'ROOT.war'
+//	enabled = true
+	enabled = false //-> 외장 톰캣 사용시 추가
 }
 
 war {
-	enabled = true
+	enabled = true //-> 외장 톰캣 실행시 추가
 }

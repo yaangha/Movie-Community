@@ -30,7 +30,8 @@ public class ReviewController {
 
     @GetMapping("create")
     public String create(Model model) {
-        return "/review/create";
+//        return "/review/create";
+        return "review/create";
     }
 
     @PostMapping("create")
@@ -45,7 +46,8 @@ public class ReviewController {
     public String modify(Long review_id, Model model) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
         model.addAttribute("review", review);
-        return "/review/modify";
+//        return "/review/modify";
+        return "review/modify";
     }
 
     @PostMapping("modify")
@@ -66,6 +68,7 @@ public class ReviewController {
         Review review = reviewService.findReviewByReviewId(review_id).get();
 
         model.addAttribute("review", review);
-        return "/review/detail";
+//        return "/review/detail";
+        return "review/detail";
     }
 }

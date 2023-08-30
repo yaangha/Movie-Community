@@ -30,7 +30,8 @@ public class MemberController {
 
     @GetMapping("join")
     public String join() {
-        return "/member/join";
+//        return "/member/join";
+        return "member/join";
     }
 
     @PostMapping("join")
@@ -46,7 +47,8 @@ public class MemberController {
 
     @GetMapping("login")
     public String loginBefore() {
-        return "/member/login";
+//        return "/member/login";
+        return "member/login";
     }
 
 //    @PostMapping("login")
@@ -73,6 +75,7 @@ public class MemberController {
         model.addAttribute("reviewSave", reviewSave);
         model.addAttribute("reviewRelease", reviewRelease);
 
-        return "/member/mypage";
+//        return "/member/mypage";
+        return "member/mypage";
     }
 }

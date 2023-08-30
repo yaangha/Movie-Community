@@ -29,7 +29,8 @@ public class HomeController {
 
         model.addAttribute("review_list", review_list);
 
-        return "/member/homepage";
+//        return "/member/homepage";
+        return "member/homepage";
     }
 
 }
