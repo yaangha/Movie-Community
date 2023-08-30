@@ -26,24 +26,30 @@
         line-height: 1.5em;
     }
 
-    #btnDelete, #btnModify {
+    #btnDelete, #btnModify, #btnRelease {
+        border-radius: 40px 80px;
         padding: 5px 10px;
         border: none;
         background: white;
     }
 
     #btnDelete {
-        border-radius: 40px 80px;
         border: thin solid red;
         color: red;
         margin-right: 15px;
     }
 
     #btnModify {
-        border-radius: 40px 80px;
         border: thin solid blue;
         color: blue;
+        margin-right: 15px;
     }
+
+    #btnRelease {
+        border: thin solid green;
+        color: green;
+    }
+
   </style>
 </head>
 <div layout:fragment="content">
@@ -51,6 +57,7 @@
   <div style="width:75%; margin: auto;">
     <form id="formModify">
       <input id="review_id" name="review_id" type="hidden" th:value="${ review.id }"/>
+      <input id="status" name="status" type="hidden" th:value="${ review.status }"/>
       <div style="border-bottom: thin solid silver;">
         <input id="title" name="title" th:value="${ review.title }" placeholder="제목을 입력하세요" required autofocus/>
       </div>
@@ -63,6 +70,9 @@
         <button id="btnDelete">DELETE</button>
       </a>
       <button id="btnModify">MODIFY</button>
+      <th:block th:if="${review.status} == 0">
+        <button id="btnRelease">RELEASE</button>
+      </th:block>
     </div>
   </div>
 </div><!-- main content end -->
@@ -87,6 +97,17 @@
         formModify.submit();
       }
   });
+
+  const btnRelease = document.querySelector('#btnRelease');
+  const status = document.querySelector('#status');
+  btnRelease.addEventListener('click', function () {
+      status.value = 1;
+      formModify.action = '/modify';
+      formModify.method = 'post';
+      formModify.submit();
+  });
+
+
 </script>
 </th:block>
 </html>

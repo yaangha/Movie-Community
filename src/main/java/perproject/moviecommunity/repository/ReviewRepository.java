@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReviewRepository {
-//public interface ReviewRepository extends JpaRepository<Review, Long> {
-
     Review save(Review review);
     List<Review> findByOrderByIdAsc();
     List<Review> findReviewByStatus(String status);
