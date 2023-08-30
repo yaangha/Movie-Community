@@ -2,13 +2,16 @@ package perproject.moviecommunity.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.repository.MemoryMemberRepository;
 
 public class MemberServiceTest {
 
     private MemoryMemberRepository memberRepository = new MemoryMemberRepository();
-    private MemberService memberService = new MemberService(memberRepository);
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private MemberService memberService = new MemberService(memberRepository, passwordEncoder);
 
     @Test
     public void join() {
@@ -23,6 +26,7 @@ public class MemberServiceTest {
         // then
         Member result = memberService.findOne(member.getName());
         Assertions.assertEquals(memberId, result.getId());
+        System.out.println("result = " + result.getPw());
     }
 
     @Test

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>THE SUMMER</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        #contentLayout {
+            padding-top: 75px;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div id="contentLayout" layout:fragment="content"></div>
+    <th:block layout:fragment="script"></th:block>
+</body>
+</html>

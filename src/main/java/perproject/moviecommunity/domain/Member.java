@@ -1,41 +1,35 @@
 package perproject.moviecommunity.domain;
 
+import lombok.*;
+
+//import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Getter
+@Setter
+@ToString
+//@Entity
+//@SequenceGenerator(name = "MEMBER_SEQ_GEN", sequenceName = "MEMBER_SEQ", allocationSize = 1)
 public class Member {
 
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GEN")
     private Long id;
-    private String name;
-    private String pw;
 
-    public Long getId() {
-        return id;
+    //@Column(nullable = false)
+    private String username;
+
+    //@Column(nullable = false)
+    private String password;
+
+    //@ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<MemberRole> roles = new HashSet<>();
+
+    public Member addRole(MemberRole role) {
+        roles.add(role);
+        return this;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPw() {
-        return pw;
-    }
-
-    public void setPw(String pw) {
-        this.pw = pw;
-    }
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", pw='" + pw + '\'' +
-                '}';
-    }
 }

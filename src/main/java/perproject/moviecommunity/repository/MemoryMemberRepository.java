@@ -26,7 +26,7 @@ public class MemoryMemberRepository implements MemberRepository {
      * 전체 회원 조회시 사용
      */
     @Override
-    public List<Member> findAll() {
+    public List<Member> findByOrderByIdAsc() {
         return new ArrayList<>(memberStore.values());
     }
 
@@ -42,11 +42,11 @@ public class MemoryMemberRepository implements MemberRepository {
 
     /**
      * name으로 회원을 조회할 때 사용
-     * @param name 조회할 회원의 이름
+     * @param username 조회할 회원의 이름
      */
     @Override
-    public Optional<Member> findByName(String name) {
-        return memberStore.values().stream().filter(member -> member.getName().equals(name)).findAny();
+    public Optional<Member> findByUsername(String username) {
+        return memberStore.values().stream().filter(member -> member.getUsername().equals(username)).findAny();
     }
 
     /**

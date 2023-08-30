@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<div th:fragment="header">
+    <head>
+        <style>
+            #nav_bar {
+                padding: 15px;
+                text-align: center;
+                font-size: 18px;
+                position: fixed;
+                width: 100%;
+                background: yellow;
+            }
+
+            #nav_bar a {
+                display: inline-block;
+                width: 95px;
+                background: black;
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                border-radius: 40px 80px;
+                padding: 10px;
+                margin: 0 20px;
+                letter-spacing: 3px;
+            }
+        </style>
+    </head>
+
+    <div id="nav_bar"><!-- nav bar start-->
+        <a th:href="@{/}">HOME</a>
+        <a th:href="@{create}">WRITE</a>
+        <th:block sec:authorize="isAnonymous()">
+            <a th:href="@{login}" style="background:red;">LOGIN</a>
+            <a th:href="@{join}" style="background:red;">JOIN</a>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+            <a th:href="@{mypage}">MYPAGE</a>
+            <a th:href="@{logout}" onclick="return confirm('로그아웃하시겠습니까?');" style="background:red;">LOGOUT</a>
+        </th:block>
+    </div><!-- nav bar end-->
+</div>
+</html>

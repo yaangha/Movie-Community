@@ -27,7 +27,7 @@ public class MemoryReviewRepository implements ReviewRepository {
      * 전체 리뷰 조회시 사용
      */
     @Override
-    public List<Review> findAll() {
+    public List<Review> findByOrderByIdAsc() {
         return new ArrayList<>(reviewStore.values());
     }
 

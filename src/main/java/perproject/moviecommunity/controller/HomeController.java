@@ -23,15 +23,14 @@ public class HomeController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/homepage")
-    public String home(Long member_id, Model model) {
-        Member member = memberService.findOneById(member_id);
+    @GetMapping("/")
+    public String home(Model model) {
         List<Review> review_list = reviewService.readReviewByStatus("1");
 
         model.addAttribute("review_list", review_list);
-        model.addAttribute("member", member);
 
-        return "/member/homepage";
+//        return "/member/homepage";
+        return "member/homepage";
     }
 
 }
