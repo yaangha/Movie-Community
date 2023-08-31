@@ -6,8 +6,6 @@ import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.repository.MemberRepository;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
-import perproject.moviecommunity.repository.MemoryReviewRepository;
 import perproject.moviecommunity.repository.ReviewRepository;
 
 import java.time.LocalDateTime;
@@ -21,7 +19,7 @@ public class ReviewService {
     private final MemberRepository memberRepository;
 
     @Autowired
-    public ReviewService(MemoryReviewRepository reviewRepository, MemoryMemberRepository memberRepository) {
+    public ReviewService(ReviewRepository reviewRepository, MemberRepository memberRepository) {
         this.reviewRepository = reviewRepository;
         this.memberRepository = memberRepository;
     }
@@ -46,11 +44,13 @@ public class ReviewService {
     }
 
     /**
-     * 리뷰 삭제시
+     * review를 물리적으로 삭제하지 않고 status 상태만 업데이트(2 = delete)
      */
     public Review delete(Long review_id) {
         Review review = reviewRepository.findById(review_id).get();
-        return reviewRepository.remove(review.getId());
+        review.setStatus("2");
+        reviewRepository.update(review);
+        return review;
     }
 
     /**

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.MemberRole;
 import perproject.moviecommunity.repository.MemberRepository;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberService(MemoryMemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -46,17 +45,6 @@ public class MemberService {
         return memberRepository.findByUsername(name).get();
     }
 
-    /**
-     * 로그인할 때 사용
-     */
-    public Member login(String name, String pw) {
-        Member member = memberRepository.findByUsername(name).get();
-        if (pw.equals(member.getPassword())) {
-            return member;
-        } else {
-            return null;
-        }
-    }
 
     public Member findOneById(Long id) {
         return memberRepository.findById(id).get();
