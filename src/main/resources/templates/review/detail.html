@@ -50,7 +50,7 @@
 			text-decoration: none;
 		}
 
-		#btnDelete, #btnModify {
+		#btnDelete, #btnModify, #btnRelease {
 		    padding: 5px 10px;
 		    border: none;
 		    background: white;
@@ -67,6 +67,13 @@
             border-radius: 40px 80px;
             border: thin solid blue;
 		    color: blue;
+		}
+
+		#btnRelease {
+		    border-radius: 40px 80px;
+            border: thin solid green;
+		    color: green;
+		    margin-left: 15px;
 		}
 	</style>
 </head>
@@ -89,8 +96,28 @@
                 <a th:href="@{/modify?(review_id=${review.id})}">
                     <button id="btnModify">MODIFY</button>
                 </a>
+                <th:block th:if="${review.status} == 0">
+                    <button id="btnRelease">RELEASE</button>
+                    <form id="formModify">
+                        <input id="review_id" name="review_id" type="hidden" th:value="${ review.id }"/>
+                        <input id="status" name="status" type="hidden" th:value="${ review.status }"/>
+                    </form>
+                </th:block>
             </div>
         </div>
     </div>
 </div>
+<th:block layout:fragment="script">
+<script>
+const btnRelease = document.querySelector('#btnRelease');
+const formModify = document.querySelector('#formModify');
+const status = document.querySelector('#status');
+btnRelease.addEventListener('click', function () {
+    status.value = 1;
+    formModify.action = '/modify';
+    formModify.method = 'post';
+    formModify.submit();
+});
+</script>
+</th:block>
 </html>

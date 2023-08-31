@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.MemberRole;
 import perproject.moviecommunity.repository.MemberRepository;
+import perproject.moviecommunity.repository.MemoryMemberRepository;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberService(MemoryMemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
     }
