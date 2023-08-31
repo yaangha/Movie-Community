@@ -67,7 +67,7 @@ public class MemberController {
         for (Review r : reviewAll) {
             if (r.getStatus().equals("1")) {
                 reviewRelease.add(r);
-            } else {
+            } else if (r.getStatus().equals("0")) {
                 reviewSave.add(r);
             }
         }

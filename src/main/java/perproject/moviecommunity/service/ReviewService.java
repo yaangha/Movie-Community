@@ -44,11 +44,13 @@ public class ReviewService {
     }
 
     /**
-     * 리뷰 삭제시
+     * review를 물리적으로 삭제하지 않고 status 상태만 업데이트(2 = delete)
      */
     public Review delete(Long review_id) {
         Review review = reviewRepository.findById(review_id).get();
-        return reviewRepository.remove(review.getId());
+        review.setStatus("2");
+        reviewRepository.update(review);
+        return review;
     }
 
     /**

@@ -45,17 +45,6 @@ public class MemberService {
         return memberRepository.findByUsername(name).get();
     }
 
-    /**
-     * 로그인할 때 사용
-     */
-    public Member login(String name, String pw) {
-        Member member = memberRepository.findByUsername(name).get();
-        if (pw.equals(member.getPassword())) {
-            return member;
-        } else {
-            return null;
-        }
-    }
 
     public Member findOneById(Long id) {
         return memberRepository.findById(id).get();
