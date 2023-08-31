@@ -78,7 +78,7 @@ public class ReviewService {
      * 리뷰 수정시 사용
      */
     public Review modifyReview(Review review, ReviewDto dto) {
-        if (dto.getTitle() == null) {
+        if (dto.getTitle() == null) { // title이 null인 경우는 save-detail 페이지에서 release 버튼을 눌렀을 경우임
             review.setStatus(dto.getStatus());
         } else {
             review.setTitle(dto.getTitle());
@@ -95,6 +95,7 @@ public class ReviewService {
      * 상태에 따른 리뷰 조회
      */
     public List<Review> readReviewByStatus(String status) {
-        return reviewRepository.findReviewByStatus(status);
+
+        return reviewRepository.findByStatusOrderByIdDesc(status);
     }
 }

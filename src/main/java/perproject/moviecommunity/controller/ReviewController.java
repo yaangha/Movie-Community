@@ -1,6 +1,6 @@
 package perproject.moviecommunity.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,24 +13,15 @@ import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.service.MemberService;
 import perproject.moviecommunity.service.ReviewService;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Controller
+@AllArgsConstructor
 public class ReviewController {
 
     private final ReviewService reviewService;
     private final MemberService memberService;
 
-    @Autowired
-    public ReviewController(ReviewService reviewService, MemberService memberService) {
-        this.reviewService = reviewService;
-        this.memberService = memberService;
-    }
-
     @GetMapping("create")
     public String create(Model model) {
-//        return "/review/create";
         return "review/create";
     }
 
@@ -46,7 +37,7 @@ public class ReviewController {
     public String modify(Long review_id, Model model) {
         Review review = reviewService.findReviewByReviewId(review_id).get();
         model.addAttribute("review", review);
-//        return "/review/modify";
+
         return "review/modify";
     }
 
@@ -59,7 +50,7 @@ public class ReviewController {
 
     @GetMapping("delete")
     public String deleteReview(Long review_id) {
-        Review review = reviewService.delete(review_id);
+        reviewService.delete(review_id);
         return "redirect:/";
     }
 
@@ -68,7 +59,7 @@ public class ReviewController {
         Review review = reviewService.findReviewByReviewId(review_id).get();
 
         model.addAttribute("review", review);
-//        return "/review/detail";
+
         return "review/detail";
     }
 }

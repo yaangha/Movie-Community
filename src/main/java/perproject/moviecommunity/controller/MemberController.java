@@ -1,6 +1,6 @@
 package perproject.moviecommunity.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,20 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
     private final ReviewService reviewService;
 
-    @Autowired
-    public MemberController(MemberService memberService, ReviewService reviewService) {
-        this.memberService = memberService;
-        this.reviewService = reviewService;
-    }
-
     @GetMapping("join")
     public String join() {
-//        return "/member/join";
         return "member/join";
     }
 
@@ -41,21 +35,13 @@ public class MemberController {
         member.setPassword(dto.getPassword());
 
         memberService.join(member);
-        System.out.println(member.toString());
         return "redirect:/login";
     }
 
     @GetMapping("login")
     public String loginBefore() {
-//        return "/member/login";
         return "member/login";
     }
-
-//    @PostMapping("login")
-//    public String loginAfter(MemberRegisterDto dto) {
-//        Member member = memberService.login(dto.getUsername(), dto.getPassword());
-//        return "redirect:/homepage?member_id=" + member.getId();
-//    }
 
     @GetMapping("mypage")
     public String mypage(@AuthenticationPrincipal MemberSecurityDto memberSecurityDto, Model model) {
@@ -75,7 +61,6 @@ public class MemberController {
         model.addAttribute("reviewSave", reviewSave);
         model.addAttribute("reviewRelease", reviewRelease);
 
-//        return "/member/mypage";
         return "member/mypage";
     }
 }
