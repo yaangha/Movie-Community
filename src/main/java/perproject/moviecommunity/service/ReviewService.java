@@ -6,8 +6,6 @@ import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.repository.MemberRepository;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
-import perproject.moviecommunity.repository.MemoryReviewRepository;
 import perproject.moviecommunity.repository.ReviewRepository;
 
 import java.time.LocalDateTime;
@@ -21,7 +19,7 @@ public class ReviewService {
     private final MemberRepository memberRepository;
 
     @Autowired
-    public ReviewService(MemoryReviewRepository reviewRepository, MemoryMemberRepository memberRepository) {
+    public ReviewService(ReviewRepository reviewRepository, MemberRepository memberRepository) {
         this.reviewRepository = reviewRepository;
         this.memberRepository = memberRepository;
     }
