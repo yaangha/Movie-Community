@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.MemberRegisterDto;
@@ -39,7 +40,11 @@ public class MemberController {
     }
 
     @GetMapping("login")
-    public String loginBefore() {
+    public String loginBefore(@RequestParam(value = "error", required = false) String error,
+                              @RequestParam(value = "exception", required = false) String exception,
+                              Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
         return "member/login";
     }
 
