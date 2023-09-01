@@ -3,11 +3,15 @@ package perproject.moviecommunity.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.MemberRole;
 import perproject.moviecommunity.repository.MemberRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MemberService {
@@ -45,8 +49,18 @@ public class MemberService {
         return memberRepository.findByUsername(name).get();
     }
 
-
     public Member findOneById(Long id) {
         return memberRepository.findById(id).get();
+    }
+
+    public Map<String, String> validateHandling(Errors errors) {
+        Map<String, String> validResult = new HashMap<>();
+
+        for (FieldError e : errors.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", e.getField());
+            validResult.put(validKeyName, e.getDefaultMessage());
+        }
+
+        return validResult;
     }
 }

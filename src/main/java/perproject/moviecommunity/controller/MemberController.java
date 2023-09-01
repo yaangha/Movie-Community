@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +15,10 @@ import perproject.moviecommunity.dto.MemberSecurityDto;
 import perproject.moviecommunity.service.MemberService;
 import perproject.moviecommunity.service.ReviewService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -30,7 +33,18 @@ public class MemberController {
     }
 
     @PostMapping("join")
-    public String joinMember(MemberRegisterDto dto) {
+    public String joinMember(@Valid MemberRegisterDto dto, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("dto", dto.getUsername());
+            Map<String, String> validResult = memberService.validateHandling(errors);
+
+            for (String key : validResult.keySet()) {
+                model.addAttribute(key, validResult.get(key));
+            }
+
+            return "member/join";
+        }
+
         Member member = new Member();
         member.setUsername(dto.getUsername());
         member.setPassword(dto.getPassword());
