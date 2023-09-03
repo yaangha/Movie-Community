@@ -2,29 +2,27 @@ package perproject.moviecommunity.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
 @ToString
-@Entity
-//@SequenceGenerator(name = "MEMBER_SEQ_GEN", sequenceName = "MEMBER_SEQ", allocationSize = 1)
+//@Entity
 public class Member {
 
-    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GEN")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+//    @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private Set<MemberRole> roles = new HashSet<>();
 

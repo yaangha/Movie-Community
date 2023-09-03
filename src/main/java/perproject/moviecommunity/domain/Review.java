@@ -4,26 +4,24 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
-@Entity
-//@SequenceGenerator(name = "REVIEW_SEQ_GEN", sequenceName = "REVIEW_SEQ", allocationSize = 1)
+//@Entity
 public class Review {
 
-    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQ_GEN")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
+//    @ManyToOne
+//    @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String title;
 
     private String content;
