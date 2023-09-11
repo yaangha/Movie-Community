@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
-public class Review {
+public class ReviewLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,17 +21,18 @@ public class Review {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Column(nullable = false)
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "review_id")
+    private Review review;
 
-    private String content;
+    @Column
+    private LocalDateTime clicked_time;
 
-    private LocalDateTime created_time;
+    public ReviewLike updateLike(Member member, Review review) {
+        this.member = member;
+        this.review = review;
+        clicked_time = LocalDateTime.now();
 
-    private LocalDateTime modified_time;
-
-    /**
-     * 0 = save, 1 = release, 2 = delete
-     */
-    private String status;
+        return this;
+    }
 }

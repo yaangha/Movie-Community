@@ -1,11 +1,12 @@
 package perproject.moviecommunity.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.repository.MemberRepository;
+import perproject.moviecommunity.repository.ReviewLikeRepository;
 import perproject.moviecommunity.repository.ReviewRepository;
 
 import java.time.LocalDateTime;
@@ -13,16 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
-
-    @Autowired
-    public ReviewService(ReviewRepository reviewRepository, MemberRepository memberRepository) {
-        this.reviewRepository = reviewRepository;
-        this.memberRepository = memberRepository;
-    }
 
     /**
      * 리뷰 생성시

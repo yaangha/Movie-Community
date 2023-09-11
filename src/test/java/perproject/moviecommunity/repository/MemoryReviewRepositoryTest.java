@@ -4,21 +4,22 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
+import perproject.moviecommunity.domain.ReviewLike;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class MemoryReviewRepositoryTest {
 
-    MemoryReviewRepository reviewRepository = new MemoryReviewRepository();
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    ReviewRepository reviewRepository;
+    MemberRepository memberRepository;
 
     @Test
     public void save() {
         //given
         Member member = new Member();
-        member.setName("test1");
-        member.setPw("1234");
+        member.setUsername("test1");
+        member.setPassword("1234");
         memberRepository.save(member);
 
         Review review = new Review();
@@ -33,20 +34,18 @@ public class MemoryReviewRepositoryTest {
         //then
         Review result = reviewRepository.findById(review.getId()).get();
         Assertions.assertThat(result).isEqualTo(review);
-        System.out.println(review.toString());
-        System.out.println(result.toString());
     }
 
     @Test
     public void findAll() {
         //given
         Member m1 = new Member();
-        m1.setName("apple");
-        m1.setPw("aaaa");
+        m1.setUsername("apple");
+        m1.setPassword("aaaa");
 
         Member m2 = new Member();
-        m2.setName("melon");
-        m2.setPw("mmmm");
+        m2.setUsername("melon");
+        m2.setPassword("mmmm");
 
         Review r1 = new Review();
         r1.setMember(m1);
@@ -77,12 +76,12 @@ public class MemoryReviewRepositoryTest {
     public void find() {
         //given
         Member m1 = new Member();
-        m1.setName("apple");
-        m1.setPw("aaaa");
+        m1.setUsername("apple");
+        m1.setPassword("aaaa");
 
         Member m2 = new Member();
-        m2.setName("melon");
-        m2.setPw("mmmm");
+        m2.setUsername("melon");
+        m2.setPassword("mmmm");
 
         Review r1 = new Review();
         r1.setMember(m1);
@@ -115,4 +114,33 @@ public class MemoryReviewRepositoryTest {
             System.out.println("r.toString() = " + r.toString());
         }
     }
+
+    @Test
+    public void likeReview() {
+        //given 로그인한 유저가 리뷰를 보고
+        Member member = new Member();
+        member.setUsername("test1");
+        member.setPassword("1234");
+        memberRepository.save(member);
+
+        Review review = new Review();
+        review.setMember(member);
+        review.setContent("this is test..");
+        review.setCreated_time(LocalDateTime.now());
+        review.setModified_time(LocalDateTime.now());
+
+        //when 좋아요 버튼을 눌렀을 때
+        ReviewLike insertReviewList = clickReview(member.getId(), review.getId());
+
+        //then 데이터 추가되는지
+    }
+
+    private ReviewLike clickReview(Long member_id, Long review_id) {
+        ReviewLike reviewLike = new ReviewLike();
+        Member member = memberRepository.findById(member_id).get();
+        Review review = reviewRepository.findById(review_id).get();
+        ReviewLike insertReviewList = reviewLike.updateLike(member, review);
+        return insertReviewList;
+    }
+
 }
