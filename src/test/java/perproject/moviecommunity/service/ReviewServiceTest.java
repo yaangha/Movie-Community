@@ -7,13 +7,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.ReviewDto;
-import perproject.moviecommunity.repository.MemoryMemberRepository;
-import perproject.moviecommunity.repository.MemoryReviewRepository;
+import perproject.moviecommunity.repository.MemberRepository;
+import perproject.moviecommunity.repository.ReviewLikeRepository;
+import perproject.moviecommunity.repository.ReviewRepository;
 
 public class ReviewServiceTest {
 
-    private MemoryReviewRepository reviewRepository = new MemoryReviewRepository();
-    private MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    private ReviewRepository reviewRepository;
+    private MemberRepository memberRepository;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private MemberService memberService = new MemberService(memberRepository, passwordEncoder);
     private ReviewService reviewService = new ReviewService(reviewRepository, memberRepository);
@@ -22,8 +23,8 @@ public class ReviewServiceTest {
     public void create() {
         //given
         Member member = new Member();
-        member.setName("apple");
-        member.setPw("aaaa");
+        member.setUsername("apple");
+        member.setPassword("aaaa");
 
         Review review = new Review();
         review.setMember(member);
