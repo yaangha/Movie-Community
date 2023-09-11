@@ -49,6 +49,11 @@ public class MemoryMemberRepository implements MemberRepository {
         return memberStore.values().stream().filter(member -> member.getUsername().equals(username)).findAny();
     }
 
+    @Override
+    public Optional<Member> findByEmail(String email) {
+        return memberStore.values().stream().filter(member -> member.getEmail().equals(email)).findAny();
+    }
+
     /**
      * 회원 탈퇴시 사용
      */

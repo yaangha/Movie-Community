@@ -19,6 +19,8 @@ public class Member {
 //    @Column(nullable = false)
     private String username;
 
+    private String email;
+
 //    @Column(nullable = false)
     private String password;
 

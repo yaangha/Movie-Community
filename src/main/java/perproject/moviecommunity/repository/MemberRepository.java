@@ -16,4 +16,5 @@ public interface MemberRepository {
     List<Member> findByOrderByIdAsc();
     Optional<Member> findById(Long id);
     Optional<Member> findByUsername(String username);
+    Optional<Member> findByEmail(String email);
 }

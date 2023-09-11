@@ -53,6 +53,10 @@ public class MemberService {
         return memberRepository.findById(id).get();
     }
 
+    public Member findUserByEmail(String email) {
+        return memberRepository.findByEmail(email).get();
+    }
+
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validResult = new HashMap<>();
 

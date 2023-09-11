@@ -63,7 +63,7 @@
             <div id="title"><a href="/">THE SUMMER</a>'s join!</div>
             <div style="margin-top: 30px; text-align: left;">
                 <form id="formJoin">
-                    <div class="info" style="border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                    <div class="info" style="border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: none;">
                         <div th:if="${valid_username}">
                             <div class="valid_info" th:text="${valid_username}"></div>
                             <input class="username" name="username" type="text" th:if="${not#strings.isEmpty(dto)}" th:value="${dto}" style="width: 100%" placeholder="아이디" autofocus />
@@ -71,6 +71,12 @@
                         <div th:unless="${valid_username}">
                             <input class="username" name="username" type="text" style="width: 100%" placeholder="아이디" autofocus />
                         </div>
+                    </div>
+                    <div class="info">
+                        <div th:if="${valid_email}">
+                            <div class="valid_info" th:text="${valid_email}"></div>
+                        </div>
+                        <input class="email" name="email" type="text" style="width: 100%" placeholder="test@sample.com" autofocus />
                     </div>
                     <div class="info" style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border-top: none;">
                         <div th:if="${valid_password}">

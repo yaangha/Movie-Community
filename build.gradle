@@ -7,7 +7,7 @@ plugins {
 
 group = 'per-project'
 version = '0.0.1-SNAPSHOT'
-apply plugin: 'war' //-> 외장 톰캣 사용시 추가
+//apply plugin: 'war' //-> 외장 톰캣 사용시 추가
 
 java {
 	sourceCompatibility = '11'
@@ -18,8 +18,8 @@ repositories {
 }
 
 dependencies {
-//	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' //-> 외장 톰캣 사용시 추가
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
+//	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat' //-> 외장 톰캣 사용시 추가
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

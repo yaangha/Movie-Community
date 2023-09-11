@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
 import perproject.moviecommunity.dto.MemberRegisterDto;
@@ -47,6 +48,7 @@ public class MemberController {
 
         Member member = new Member();
         member.setUsername(dto.getUsername());
+        member.setEmail(dto.getEmail());
         member.setPassword(dto.getPassword());
 
         memberService.join(member);
