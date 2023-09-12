@@ -18,39 +18,83 @@
 	a:hover {
 		color: gray;
 	}
+
+	.eachBlock {
+	    width: 75%;
+	    margin: auto;
+	}
+
+	.title {
+	    font-size: 21px;
+	    padding-bottom: 5px;
+	}
+
+	.content {
+	    color: silver;
+	    padding-bottom: 35px;
+	}
+
+	.reviewCreatedTime {
+	    font-size: small;
+	    color: gray;
+	}
+
+	.chainBlock {
+	    margin: 10px 0;
+	    border-bottom: thin solid silver;
+	    padding: 25px;
+	}
+
+	#reviewLikeTitle {
+	    font-size: 21px;
+	    font-weight: bold;
+	    padding-top: 30px;
+	}
 </style>
 </head>
 <div layout:fragment="content">
-  <div style="width: 75%; margin: auto;">
-    <div style="width:100%; margin-bottom: 15px;">
-      <button id="btnChangeRelease" style="width: 49%; display: inline-block; padding: 15px 0; text-align: center; font-size: 27px; border:none; background-color:white; border-bottom: thin solid black;">발행한 글 <span></span></button>
-      <button id="btnChangeSave" style="width: 49%; display: inline-block; padding: 15px 0; text-align: center; font-size: 27px; border:none; background-color:white; border-bottom: thin solid silver; color: silver;">저장된 글 <span></span></button>
-    </div>
+    <div class="eachBlock">
+        <div style="width:100%; margin-bottom: 15px;">
+            <button id="btnChangeRelease" style="width: 49%; display: inline-block; padding: 15px 0; text-align: center; font-size: 27px; border:none; background-color:white; border-bottom: thin solid black;">발행한 글 <span></span></button>
+            <button id="btnChangeSave" style="width: 49%; display: inline-block; padding: 15px 0; text-align: center; font-size: 27px; border:none; background-color:white; border-bottom: thin solid silver; color: silver;">저장된 글 <span></span></button>
+        </div>
 
-    <div id="releaseList"><!-- release list -->
-      <div th:each=" reviewRelease : ${ reviewRelease }" style="margin: 10px 0; border-bottom: thin solid silver; padding: 25px;">
-        <a th:href="@{ /detail?review_id={review_id} (review_id = ${ reviewRelease.id }) }">
-            <div class="contents" th:text="${ reviewRelease.title }" style="font-size: 21px; padding-bottom: 5px;"></div>
-            <div class="contents" th:text="${ reviewRelease.content }" style="color: silver; padding-bottom: 35px;"></div>
-            <div style="font-size: small; color: gray;">
-              <span th:text="${ #temporals.format(reviewRelease.created_time, 'EEE, d MMM yyyy HH:mm', new java.util.Locale('en', 'US')) }"></span>
+        <div id="releaseList"><!-- release list -->
+            <div class="chainBlock" th:each=" reviewRelease : ${ reviewRelease }">
+                <a th:href="@{ /detail(review_id = ${ reviewRelease.id }) }">
+                    <div class="contents title" th:text="${ reviewRelease.title }"></div>
+                    <div class="contents content" th:text="${ reviewRelease.content }"></div>
+                    <div class="reviewCreatedTime">
+                        <span th:text="${ #temporals.format(reviewRelease.created_time, 'EEE, d MMM yyyy HH:mm', new java.util.Locale('en', 'US')) }"></span>
+                    </div>
+                </a>
             </div>
-        </a>
-      </div>
-    </div>
+        </div>
 
-    <div id="saveList" style="display: none;"><!-- save list -->
-      <div th:each=" reviewSave : ${ reviewSave }" style="margin: 10px 0; border-bottom: thin solid silver; padding: 25px;">
-        <a th:href="@{ /detail?review_id={review_id} (review_id = ${ reviewSave.id }) }">
-            <div class="contents" th:text="${ reviewSave.title }" style="font-size: 21px; padding-bottom: 5px;"></div>
-            <div class="contents" th:text="${ reviewSave.content }" style="color: silver; padding-bottom: 35px;"></div>
-            <div style="font-size: small; color: gray;">
-              <span th:text="${ #temporals.format(reviewSave.created_time, 'EEE, d MMM yyyy HH:mm', new java.util.Locale('en', 'US')) }"></span>
+        <div id="saveList" style="display: none;"><!-- save list -->
+            <div class="chainBlock" th:each=" reviewSave : ${ reviewSave }">
+                <a th:href="@{ /detail(review_id = ${ reviewSave.id }) }">
+                    <div class="contents title" th:text="${ reviewSave.title }"></div>
+                    <div class="contents content" th:text="${ reviewSave.content }"></div>
+                    <div class="reviewCreatedTime">
+                        <span th:text="${ #temporals.format(reviewSave.created_time, 'EEE, d MMM yyyy HH:mm', new java.util.Locale('en', 'US')) }"></span>
+                    </div>
+                </a>
             </div>
-        </a>
-      </div>
+        </div>
     </div>
-  </div>
+    <div class="eachBlock">
+        <div id="reviewLikeTitle">like Reviews!</div>
+        <div class="chainBlock" th:each="review : ${ reviewLikeList }">
+            <a th:href="@{ /detail(review_id = ${ review.id }) }">
+                <div class="contents title" th:text="${ review.title }"></div>
+                <div class="contents content" th:text="${ review.content }"></div>
+                <div class="reviewCreatedTime">
+                    <span th:text="${ review.member.username + ' • ' }"></span><span th:text="${ #temporals.format(review.created_time, 'EEE, d MMM yyyy HH:mm', new java.util.Locale('en', 'US')) }"></span>
+                </div>
+            </a>
+        </div>
+    </div>
 </div><!-- fragment end -->
 <th:block layout:fragment="script">
   <script>

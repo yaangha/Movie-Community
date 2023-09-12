@@ -28,7 +28,7 @@ public class ReviewLike {
     @Column
     private LocalDateTime clicked_time;
 
-    public ReviewLike updateLike(Member member, Review review) {
+    public ReviewLike createReviewLike(Member member, Review review) {
         this.member = member;
         this.review = review;
         clicked_time = LocalDateTime.now();

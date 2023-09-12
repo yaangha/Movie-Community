@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
+import perproject.moviecommunity.domain.ReviewLike;
 import perproject.moviecommunity.dto.MemberRegisterDto;
 import perproject.moviecommunity.dto.MemberSecurityDto;
 import perproject.moviecommunity.service.MemberService;
@@ -68,6 +69,7 @@ public class MemberController {
         List<Review> reviewAll = reviewService.findReviewByMember(member);
         List<Review> reviewSave = new ArrayList<>();
         List<Review> reviewRelease = new ArrayList<>();
+        List<Review> reviewLikeList = reviewService.findReviewLikesFromMember(member.getId());
 
         for (Review r : reviewAll) {
             if (r.getStatus().equals("1")) {
@@ -79,6 +81,7 @@ public class MemberController {
 
         model.addAttribute("reviewSave", reviewSave);
         model.addAttribute("reviewRelease", reviewRelease);
+        model.addAttribute("reviewLikeList", reviewLikeList);
 
         return "member/mypage";
     }

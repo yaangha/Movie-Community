@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import perproject.moviecommunity.domain.Member;
 import perproject.moviecommunity.domain.Review;
+import perproject.moviecommunity.domain.ReviewLike;
 import perproject.moviecommunity.dto.ReviewDto;
 import perproject.moviecommunity.repository.MemberRepository;
 import perproject.moviecommunity.repository.ReviewLikeRepository;
@@ -12,6 +13,7 @@ import perproject.moviecommunity.repository.ReviewRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +21,7 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
+    private final ReviewLikeRepository reviewLikeRepository;
 
     /**
      * 리뷰 생성시
@@ -91,7 +94,40 @@ public class ReviewService {
      * 상태에 따른 리뷰 조회
      */
     public List<Review> readReviewByStatus(String status) {
-
         return reviewRepository.findByStatusOrderByIdDesc(status);
+    }
+
+    public int createReviewLike(Long member_id, Long review_id) {
+        Member member = memberRepository.findById(member_id).get();
+        Review review = reviewRepository.findById(review_id).get();
+
+        ReviewLike reviewLike = new ReviewLike();
+        reviewLike.setMember(member);
+        reviewLike.setReview(review);
+        ReviewLike saveReviewLike = reviewLikeRepository.save(reviewLike);
+
+        return 1; // 정상적으로 추가되었으면 1을 리턴
+    }
+
+    public Optional<ReviewLike> findReviewLikeFromMember(Long member_id, Long review_id) {
+        Optional<ReviewLike> reviewLike = reviewLikeRepository.findByMemberIdAndReviewId(member_id, review_id);
+
+        return reviewLike;
+    }
+
+    public int deleteReviewLike(ReviewLike reviewLike) {
+        reviewLikeRepository.delete(reviewLike);
+        return 1; // 정상적으로 삭제되었으면 1을 리턴
+    }
+
+    public List<Review> findReviewLikesFromMember(Long member_id) {
+        List<ReviewLike> reviewLikeList = reviewLikeRepository.findByMemberId(member_id);
+        List<Review> list = reviewLikeList.stream().map(i -> changeReviewToReviewLike(i)).collect(Collectors.toList());
+        return list;
+    }
+
+    public Review changeReviewToReviewLike(ReviewLike reviewLike) {
+        Review review = reviewRepository.findById(reviewLike.getReview().getId()).get();
+        return review;
     }
 }
